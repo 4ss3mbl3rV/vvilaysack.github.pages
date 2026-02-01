@@ -32,28 +32,53 @@ const ThemeManager = {
     STORAGE_KEY: 'portfolio-theme',
 
     init() {
-        const savedTheme = localStorage.getItem(this.STORAGE_KEY);
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-        this.setTheme(theme);
+        // Check if user has a saved preference
+        const savedTheme = this.getSavedTheme();
 
-        // Listen for system theme changes
+        if (savedTheme) {
+            // User has set a preference before, use it
+            this.applyTheme(savedTheme);
+        } else {
+            // No preference set, detect from system theme
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            this.applyTheme(prefersDark ? 'dark' : 'light');
+        }
+
+        // Listen for system theme changes (only applies if user hasn't set a preference)
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!localStorage.getItem(this.STORAGE_KEY)) {
-                this.setTheme(e.matches ? 'dark' : 'light');
+            if (!this.getSavedTheme()) {
+                this.applyTheme(e.matches ? 'dark' : 'light');
             }
         });
     },
 
-    setTheme(theme) {
+    getSavedTheme() {
+        try {
+            return localStorage.getItem(this.STORAGE_KEY);
+        } catch (e) {
+            // localStorage not available (in-app browsers, private mode, etc.)
+            return null;
+        }
+    },
+
+    saveTheme(theme) {
+        try {
+            localStorage.setItem(this.STORAGE_KEY, theme);
+        } catch (e) {
+            // localStorage not available, preference won't persist
+        }
+    },
+
+    applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem(this.STORAGE_KEY, theme);
     },
 
     toggle() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        this.setTheme(newTheme);
+        this.applyTheme(newTheme);
+        // Save user's preference when they manually toggle
+        this.saveTheme(newTheme);
     },
 
     getCurrentTheme() {
@@ -195,14 +220,13 @@ const AvatarManager = {
 // ============================================
 
 const BlogManager = {
-    STORAGE_KEY: 'portfolio-blog-posts',
-    SESSION_KEY: 'portfolio-blog-fetched',
     postsLoaded: false,
+    cachedPosts: null, // In-memory cache for current session
 
     async fetchPosts() {
-        // Check if already fetched this session
-        if (sessionStorage.getItem(this.SESSION_KEY)) {
-            this.loadFromCache();
+        // Check if already fetched this session (use in-memory cache)
+        if (this.cachedPosts) {
+            this.renderPosts(this.cachedPosts);
             return;
         }
 
@@ -229,31 +253,14 @@ const BlogManager = {
                 throw new Error('No posts found');
             }
 
-            // Cache the posts
-            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data.items));
-            sessionStorage.setItem(this.SESSION_KEY, 'true');
+            // Cache posts in memory only (avoids localStorage issues in in-app browsers)
+            this.cachedPosts = data.items;
 
             this.renderPosts(data.items);
 
         } catch (error) {
             console.error('Error fetching Medium posts:', error);
-
-            // Try to load from cache
-            const cached = localStorage.getItem(this.STORAGE_KEY);
-            if (cached) {
-                this.renderPosts(JSON.parse(cached));
-            } else {
-                this.showError();
-            }
-        }
-    },
-
-    loadFromCache() {
-        const cached = localStorage.getItem(this.STORAGE_KEY);
-        if (cached) {
-            this.renderPosts(JSON.parse(cached));
-        } else {
-            this.fetchPosts();
+            this.showError();
         }
     },
 
@@ -402,9 +409,9 @@ const CertificationsManager = {
 
         try {
             // Fetch the YAML file
-            const response = await fetch('certifications.yml');
+            const response = await fetch('data/certifications.yml');
             if (!response.ok) {
-                throw new Error('Failed to load certifications.yml');
+                throw new Error('Failed to load data/certifications.yml');
             }
 
             const yamlText = await response.text();
@@ -539,9 +546,9 @@ const ProjectsManager = {
 
         try {
             // Fetch the YAML file
-            const response = await fetch('projects.yml');
+            const response = await fetch('data/projects.yml');
             if (!response.ok) {
-                throw new Error('Failed to load projects.yml');
+                throw new Error('Failed to load data/projects.yml');
             }
 
             const yamlText = await response.text();

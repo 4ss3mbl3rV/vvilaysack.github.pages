@@ -7,10 +7,10 @@
 #   - year: Year obtained
 #   - status: ACTIVE or EXPIRED
 #   - description: Brief description
-#   - badge: Path to badge image (e.g., badges/security-plus.png)
+#   - badge: Path to badge image (e.g., assets/badges/security-plus.png)
 #   - verify_url: URL to verify the certification (Credly, etc.)
 #
-# Badge images should be placed in a "badges" folder.
+# Badge images should be placed in the "assets/badges" folder.
 # Recommended size: 200x200 pixels, PNG format with transparency.
 # ===========================================
 
@@ -19,47 +19,47 @@ certifications:
     issuer: SEC Playground
     year: 2026
     status: ACTIVE
-    badge: badges/spg-soc-tier1.png
+    badge: assets/badges/spg-soc-tier1.png
     verify_url: https://www.credly.com/badges/db96a035-42e3-4b48-96a6-585df0a8b6aa/public_url
 
   - name: Basic SOC
     issuer: SEC Playground
     year: 2025
     status: ACTIVE
-    badge: badges/spg-basic-soc.png
+    badge: assets/badges/spg-basic-soc.png
     verify_url: https://www.credly.com/badges/15352494-7b33-4c41-a103-222caa67245e/public_url
 
   - name: Certified Cybersecurity Technician (CCT)
     issuer: EC-Council
     year: 2025
     status: ACTIVE
-    badge: badges/ecc-cct.png
+    badge: assets/badges/ecc-cct.png
     verify_url: https://aspen.eccouncil.org/Certificate/DownloadDigitalCert?Serial=RZmj0QVTO4Q+2pwGvmJgVuTbuyU0ZV3wDWARP2OWZUE=
 
   - name: Security Analyst Level 1 (SAL1)
     issuer: TryHackMe
     year: 2025
     status: ACTIVE
-    badge: badges/thm-sal1.png
+    badge: assets/badges/thm-sal1.png
     verify_url: https://www.credly.com/badges/24bd181a-70fd-4c12-b2f2-399be7bd6209/public_url
 
   - name: Certified Incident Responder (eCIR)
     issuer: INE Security
     year: 2024
     status: ACTIVE
-    badge: badges/ine-ecir.png
+    badge: assets/badges/ine-ecir.png
     verify_url: https://certs.ine.com/d2ef19a3-94e3-40ea-a6ff-6737ab7e4179
 
   - name: Foundation of Operationalizing MITRE ATT&CK v13
     issuer: AttackIQ
     year: 2024
     status: ACTIVE
-    badge: badges/attackiq-mitre-att&ck-v13.png
+    badge: assets/badges/attackiq-mitre-att&ck-v13.png
     verify_url: https://www.credly.com/badges/ddb7b1a1-863a-4078-be26-72bb285ee65e/public_url
   
   - name: Blue Team Level 1 (BTL1)
     issuer: Security Blue Team
     year: 2023
     status: ACTIVE
-    badge: badges/sbt-btl1.png
+    badge: assets/badges/sbt-btl1.png
     verify_url: https://www.credly.com/badges/e3dad2b1-9a35-4324-bf14-08a3fa686dc5/public_url
