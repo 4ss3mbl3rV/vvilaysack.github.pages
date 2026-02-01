@@ -327,9 +327,13 @@ button {
     border: 1px solid var(--border-color);
     border-radius: 50px;
     cursor: pointer;
-    transition: all var(--transition-base);
+    transition: transform 0.15s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
     user-select: none;
+    touch-action: manipulation;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .mobile-theme-toggle * {
@@ -356,7 +360,8 @@ button {
 
 .toggle-label .toggle-icon-sun,
 .toggle-label .toggle-icon-moon {
-    transition: all var(--transition-fast);
+    transition: color 0.2s ease, opacity 0.2s ease;
+    transform: translateZ(0);
 }
 
 /* Sun icon active in dark mode (to switch to light) */
@@ -388,7 +393,8 @@ button {
     border: 1px solid var(--border-color);
     border-radius: 50px;
     position: relative;
-    transition: all var(--transition-base);
+    transition: background 0.3s ease, border-color 0.3s ease;
+    transform: translateZ(0);
 }
 
 .toggle-thumb {
@@ -399,8 +405,12 @@ button {
     height: 20px;
     background: var(--accent-primary);
     border-radius: 50%;
-    transition: all var(--transition-base);
+    transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    will-change: left;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 /* Thumb position based on theme */

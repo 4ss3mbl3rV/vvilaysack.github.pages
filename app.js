@@ -688,13 +688,34 @@ function initEventListeners() {
         });
     }
 
-    // Theme toggle (mobile)
+    // Theme toggle (mobile) - use touchend for better mobile response
     const mobileThemeToggle = document.getElementById('mobileThemeToggle');
     if (mobileThemeToggle) {
+        let touchMoved = false;
+
+        mobileThemeToggle.addEventListener('touchstart', () => {
+            touchMoved = false;
+        }, { passive: true });
+
+        mobileThemeToggle.addEventListener('touchmove', () => {
+            touchMoved = true;
+        }, { passive: true });
+
+        mobileThemeToggle.addEventListener('touchend', (e) => {
+            if (!touchMoved) {
+                e.preventDefault();
+                ThemeManager.toggle();
+            }
+        });
+
+        // Fallback for non-touch devices
         mobileThemeToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            ThemeManager.toggle();
+            // Only trigger if not already handled by touch
+            if (!('ontouchstart' in window)) {
+                e.preventDefault();
+                e.stopPropagation();
+                ThemeManager.toggle();
+            }
         });
     }
 }
