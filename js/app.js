@@ -1,6 +1,7 @@
 /**
  * Personal Portfolio - Main Application
  * A single-page application with theme toggle and Medium blog integration
+ * Compatible with regular browsers and in-app browsers (Telegram, Messenger, etc.)
  */
 
 // ============================================
@@ -22,7 +23,82 @@ const CONFIG = {
 
     // RSS2JSON API endpoint (free tier)
     RSS2JSON_API: 'https://api.rss2json.com/v1/api.json',
+
+    // Fetch timeout in milliseconds
+    FETCH_TIMEOUT: 10000,
 };
+
+// ============================================
+// Storage Utility (handles in-app browser restrictions)
+// ============================================
+
+const StorageUtil = {
+    _isAvailable: null,
+
+    isAvailable() {
+        if (this._isAvailable !== null) return this._isAvailable;
+
+        try {
+            const testKey = '__storage_test__';
+            localStorage.setItem(testKey, testKey);
+            localStorage.removeItem(testKey);
+            this._isAvailable = true;
+        } catch (e) {
+            this._isAvailable = false;
+        }
+        return this._isAvailable;
+    },
+
+    get(key) {
+        if (!this.isAvailable()) return null;
+        try {
+            return localStorage.getItem(key);
+        } catch (e) {
+            return null;
+        }
+    },
+
+    set(key, value) {
+        if (!this.isAvailable()) return false;
+        try {
+            localStorage.setItem(key, value);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    },
+
+    remove(key) {
+        if (!this.isAvailable()) return false;
+        try {
+            localStorage.removeItem(key);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+};
+
+// ============================================
+// Fetch with Timeout (for slow/unstable connections)
+// ============================================
+
+async function fetchWithTimeout(url, options = {}, timeout = CONFIG.FETCH_TIMEOUT) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+    try {
+        const response = await fetch(url, {
+            ...options,
+            signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        return response;
+    } catch (error) {
+        clearTimeout(timeoutId);
+        throw error;
+    }
+}
 
 // ============================================
 // Theme Management
@@ -30,6 +106,7 @@ const CONFIG = {
 
 const ThemeManager = {
     STORAGE_KEY: 'portfolio-theme',
+    _currentTheme: null, // In-memory fallback when storage unavailable
 
     init() {
         // Check if user has a saved preference
@@ -53,24 +130,19 @@ const ThemeManager = {
     },
 
     getSavedTheme() {
-        try {
-            return localStorage.getItem(this.STORAGE_KEY);
-        } catch (e) {
-            // localStorage not available (in-app browsers, private mode, etc.)
-            return null;
-        }
+        // Try storage first, fall back to in-memory
+        return StorageUtil.get(this.STORAGE_KEY) || this._currentTheme;
     },
 
     saveTheme(theme) {
-        try {
-            localStorage.setItem(this.STORAGE_KEY, theme);
-        } catch (e) {
-            // localStorage not available, preference won't persist
-        }
+        // Save to storage if available, always keep in-memory copy
+        this._currentTheme = theme;
+        StorageUtil.set(this.STORAGE_KEY, theme);
     },
 
     applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
+        this._currentTheme = theme;
     },
 
     toggle() {
@@ -246,7 +318,12 @@ const BlogManager = {
             const feedUrl = `https://medium.com/feed/@${CONFIG.MEDIUM_USERNAME}`;
             const apiUrl = `${CONFIG.RSS2JSON_API}?rss_url=${encodeURIComponent(feedUrl)}`;
 
-            const response = await fetch(apiUrl);
+            const response = await fetchWithTimeout(apiUrl);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+
             const data = await response.json();
 
             if (data.status !== 'ok' || !data.items || data.items.length === 0) {
@@ -361,7 +438,6 @@ const BlogManager = {
     },
 
     showError() {
-        const blogGrid = document.getElementById('blogGrid');
         const blogLoading = document.getElementById('blogLoading');
         const blogError = document.getElementById('blogError');
         const blogCta = document.getElementById('blogCta');
@@ -408,8 +484,8 @@ const CertificationsManager = {
         if (certError) certError.style.display = 'none';
 
         try {
-            // Fetch the YAML file
-            const response = await fetch('data/certifications.yml');
+            // Fetch the YAML file with timeout
+            const response = await fetchWithTimeout('data/certifications.yml');
             if (!response.ok) {
                 throw new Error('Failed to load data/certifications.yml');
             }
@@ -545,8 +621,8 @@ const ProjectsManager = {
         if (projectsError) projectsError.style.display = 'none';
 
         try {
-            // Fetch the YAML file
-            const response = await fetch('data/projects.yml');
+            // Fetch the YAML file with timeout
+            const response = await fetchWithTimeout('data/projects.yml');
             if (!response.ok) {
                 throw new Error('Failed to load data/projects.yml');
             }
@@ -653,7 +729,6 @@ const ProjectsManager = {
     },
 
     showError() {
-        const projectsGrid = document.getElementById('projectsGrid');
         const projectsLoading = document.getElementById('projectsLoading');
         const projectsError = document.getElementById('projectsError');
 
@@ -690,18 +765,22 @@ function initEventListeners() {
     // Theme toggle (desktop)
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
+        themeToggle.addEventListener('click', (e) => {
+            e.preventDefault();
             ThemeManager.toggle();
         });
     }
 
-    // Theme toggle (mobile) - use touchend for better mobile response
+    // Theme toggle (mobile) - unified touch/click handling for all browsers
     const mobileThemeToggle = document.getElementById('mobileThemeToggle');
     if (mobileThemeToggle) {
+        let touchHandled = false;
         let touchMoved = false;
 
+        // Touch events for mobile devices
         mobileThemeToggle.addEventListener('touchstart', () => {
             touchMoved = false;
+            touchHandled = false;
         }, { passive: true });
 
         mobileThemeToggle.addEventListener('touchmove', () => {
@@ -711,18 +790,21 @@ function initEventListeners() {
         mobileThemeToggle.addEventListener('touchend', (e) => {
             if (!touchMoved) {
                 e.preventDefault();
+                touchHandled = true;
                 ThemeManager.toggle();
             }
         });
 
-        // Fallback for non-touch devices
+        // Click event as fallback (works for mouse and some in-app browsers)
         mobileThemeToggle.addEventListener('click', (e) => {
-            // Only trigger if not already handled by touch
-            if (!('ontouchstart' in window)) {
+            // Only handle if touch didn't already handle it
+            if (!touchHandled) {
                 e.preventDefault();
                 e.stopPropagation();
                 ThemeManager.toggle();
             }
+            // Reset flag for next interaction
+            touchHandled = false;
         });
     }
 }
