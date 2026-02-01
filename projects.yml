@@ -23,51 +23,14 @@
 # ===========================================
 
 projects:
-  - name: Incident Response Toolkit
-    category: Open Source
-    status: Active
-    description: A comprehensive collection of scripts and tools for streamlining incident response workflows, including memory acquisition, log collection, and automated triage.
-    tags:
-      - Python
-      - PowerShell
-      - Bash
-      - Forensics
-    links:
-      github: https://github.com/yourusername/ir-toolkit
-
-  - name: Home Cyber Lab
-    category: Lab
-    status: Active
-    description: A virtualized home lab environment for practicing offensive and defensive security techniques, featuring vulnerable machines, SIEM integration, and network segmentation.
-    tags:
-      - VMware
-      - Splunk
-      - pfSense
-      - Docker
-    links:
-      github: https://github.com/yourusername/home-cyber-lab
-
-  - name: Phishing Email Analyzer
-    category: Tool
+  - name: Pyphish - Phishing Simulation Platform
+    category: Thesis Project
     status: Completed
-    description: An automated tool for analyzing suspicious emails, extracting IOCs, checking reputation scores, and generating detailed threat reports for SOC analysts.
+    description: A phishing simulation toolkit used as part of final thesis project for Bechelor's degree in Computer Engineering.
     tags:
       - Python
-      - Flask
-      - VirusTotal API
-      - YARA
+      - VueJS
+      - Bash
+      - MailChimp
     links:
-      github: https://github.com/yourusername/phishing-analyzer
-      demo: https://phishing-analyzer.example.com
-
-  - name: Network IDS
-    category: Personal
-    status: Active
-    description: A lightweight intrusion detection system built for home networks, featuring real-time traffic analysis, anomaly detection, and Slack/Discord alerting integration.
-    tags:
-      - Python
-      - Scapy
-      - Machine Learning
-      - Docker
-    links:
-      github: https://github.com/yourusername/network-ids
+      github: #

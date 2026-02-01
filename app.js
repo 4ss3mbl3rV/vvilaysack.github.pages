@@ -296,6 +296,12 @@ const BlogManager = {
         card.className = 'blog-card';
         card.style.animationDelay = `${0.1 + index * 0.1}s`;
 
+        // Detect Lao language in title or content
+        const isLao = this.containsLao(post.title) || this.containsLao(post.description);
+        if (isLao) {
+            card.classList.add('lang-lao');
+        }
+
         // Extract thumbnail
         let thumbnail = post.thumbnail || '';
         if (!thumbnail) {
@@ -362,6 +368,13 @@ const BlogManager = {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    },
+
+    // Detect if text contains Lao characters (Unicode range U+0E80 to U+0EFF)
+    containsLao(text) {
+        if (!text) return false;
+        const laoPattern = /[\u0E80-\u0EFF]/;
+        return laoPattern.test(text);
     }
 };
 
@@ -432,6 +445,12 @@ const CertificationsManager = {
             certGrid.appendChild(card);
         });
 
+        // Update certification count on About page
+        const statCertifications = document.getElementById('statCertifications');
+        if (statCertifications) {
+            statCertifications.textContent = certifications.length;
+        }
+
         this.certsLoaded = true;
     },
 
@@ -474,7 +493,6 @@ const CertificationsManager = {
             </div>
             <h3 class="cert-name">${this.escapeHtml(cert.name)}</h3>
             <p class="cert-issuer">${this.escapeHtml(cert.issuer || '')}</p>
-            <p class="cert-description">${this.escapeHtml(cert.description || '')}</p>
             ${verifyHtml}
         `;
 
@@ -563,6 +581,12 @@ const ProjectsManager = {
             const card = this.createProjectCard(project, index);
             projectsGrid.appendChild(card);
         });
+
+        // Update project count on About page
+        const statProjects = document.getElementById('statProjects');
+        if (statProjects) {
+            statProjects.textContent = projects.length;
+        }
 
         this.projectsLoaded = true;
     },

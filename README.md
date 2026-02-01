@@ -137,7 +137,6 @@ projects:
   - name: My New Project
     category: Tool          # Options: Open Source, Personal, Lab, Tool
     status: Active          # Options: Active, Completed
-    description: A brief description of what this project does.
     tags:
       - Python
       - Docker
