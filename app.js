@@ -680,10 +680,20 @@ const FooterManager = {
 // ============================================
 
 function initEventListeners() {
-    // Theme toggle
+    // Theme toggle (desktop)
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
+            ThemeManager.toggle();
+        });
+    }
+
+    // Theme toggle (mobile)
+    const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+    if (mobileThemeToggle) {
+        mobileThemeToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             ThemeManager.toggle();
         });
     }
