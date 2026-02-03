@@ -1221,6 +1221,285 @@ button {
 }
 
 /* ============================================
+   Experiences Page (Vertical Timeline)
+   ============================================ */
+
+.experiences-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+    min-height: 200px;
+}
+
+/* Vertical line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--accent-primary) 5%,
+        var(--accent-primary) 95%,
+        transparent
+    );
+}
+
+.timeline-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    color: var(--text-secondary);
+}
+
+.timeline-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.timeline-error svg {
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+}
+
+.timeline-error h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-error code {
+    font-family: var(--font-mono);
+    background: var(--tag-bg);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    color: var(--accent-primary);
+}
+
+/* Timeline Item */
+.timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 0 2rem 1.5rem;
+    animation: fadeSlideUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+    padding-right: 2.5rem;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    padding-left: 2.5rem;
+    text-align: left;
+}
+
+/* Timeline dot */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 0.4rem;
+    width: 12px;
+    height: 12px;
+    background: var(--bg-primary);
+    border: 3px solid var(--accent-primary);
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 8px var(--accent-glow);
+    transition: all var(--transition-base);
+}
+
+.timeline-item:nth-child(odd)::before {
+    right: -6px;
+}
+
+.timeline-item:nth-child(even)::before {
+    left: -6px;
+}
+
+/* Timeline dot hover - solid accent blue */
+.timeline-item:hover::before {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    transform: scale(1.2);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Timeline connector line to dot */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    top: 0.75rem;
+    width: 1.5rem;
+    height: 2px;
+    background: var(--accent-primary);
+    opacity: 0.4;
+    transition: opacity var(--transition-base);
+}
+
+.timeline-item:nth-child(odd)::after {
+    right: 0;
+}
+
+.timeline-item:nth-child(even)::after {
+    left: 0;
+}
+
+.timeline-item:hover::after {
+    opacity: 1;
+}
+
+/* Timeline Card - Compact single-color design */
+.timeline-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-left: 2px solid var(--accent-primary);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    transition: all var(--transition-base);
+}
+
+.timeline-item:nth-child(odd) .timeline-card {
+    border-left: 1px solid var(--border-color);
+    border-right: 2px solid var(--accent-primary);
+}
+
+/* Timeline card hover - subtle animation with neon glow */
+.timeline-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px var(--accent-glow), 0 0 30px rgba(59, 130, 246, 0.15);
+}
+
+.timeline-date {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+}
+
+.timeline-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.15rem;
+}
+
+.timeline-position {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent-primary);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-description {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+}
+
+.timeline-highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.timeline-highlights li {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    padding: 0.2rem 0;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.timeline-highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+}
+
+.timeline-item:nth-child(odd) .timeline-highlights li {
+    padding-left: 0;
+    padding-right: 1rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-highlights li::before {
+    left: auto;
+    right: 0;
+}
+
+/* Responsive Timeline */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 15px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        padding-left: 40px !important;
+        padding-right: 0 !important;
+        padding-bottom: 1rem !important;
+        text-align: left !important;
+    }
+
+    .timeline-item::before {
+        left: 9px !important;
+        right: auto !important;
+    }
+
+    .timeline-item::after {
+        left: 21px !important;
+        right: auto !important;
+        width: 15px;
+    }
+
+    .timeline-card,
+    .timeline-item:nth-child(odd) .timeline-card {
+        border-left: 2px solid var(--accent-primary) !important;
+        border-right: 1px solid var(--border-color) !important;
+    }
+
+    .timeline-highlights li {
+        padding-left: 1rem !important;
+        padding-right: 0 !important;
+    }
+
+    .timeline-highlights li::before {
+        left: 0 !important;
+        right: auto !important;
+    }
+}
+
+/* ============================================
    Blog Page
    ============================================ */
 
@@ -1631,6 +1910,17 @@ button {
     from {
         opacity: 0;
         transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
     to {
         opacity: 1;

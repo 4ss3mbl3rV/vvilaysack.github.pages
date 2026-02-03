@@ -163,7 +163,7 @@ const ThemeManager = {
 // ============================================
 
 const Router = {
-    pages: ['home', 'about', 'certifications', 'projects', 'blog'],
+    pages: ['home', 'about', 'experiences', 'certifications', 'projects', 'blog'],
 
     init() {
         // Handle initial load
@@ -745,6 +745,132 @@ const ProjectsManager = {
 };
 
 // ============================================
+// Experiences Manager (YAML-based Timeline)
+// ============================================
+
+const ExperiencesManager = {
+    experiencesLoaded: false,
+
+    async init() {
+        await this.fetchExperiences();
+    },
+
+    async fetchExperiences() {
+        const timeline = document.getElementById('experienceTimeline');
+        const experienceLoading = document.getElementById('experienceLoading');
+        const experienceError = document.getElementById('experienceError');
+
+        if (!timeline || this.experiencesLoaded) return;
+
+        // Show loading state
+        if (experienceLoading) experienceLoading.style.display = 'flex';
+        if (experienceError) experienceError.style.display = 'none';
+
+        try {
+            // Fetch the YAML file with timeout
+            const response = await fetchWithTimeout('data/experiences.yml');
+            if (!response.ok) {
+                throw new Error('Failed to load data/experiences.yml');
+            }
+
+            const yamlText = await response.text();
+
+            // Parse YAML using js-yaml library
+            const data = jsyaml.load(yamlText);
+
+            if (!data || !data.experiences || data.experiences.length === 0) {
+                throw new Error('No experiences found in YAML');
+            }
+
+            this.renderExperiences(data.experiences);
+
+        } catch (error) {
+            console.error('Error loading experiences:', error);
+            this.showError();
+        }
+    },
+
+    renderExperiences(experiences) {
+        const timeline = document.getElementById('experienceTimeline');
+        const experienceLoading = document.getElementById('experienceLoading');
+        const experienceError = document.getElementById('experienceError');
+
+        if (!timeline) return;
+
+        // Hide loading
+        if (experienceLoading) experienceLoading.style.display = 'none';
+        if (experienceError) experienceError.style.display = 'none';
+
+        // Clear existing items
+        const existingItems = timeline.querySelectorAll('.timeline-item');
+        existingItems.forEach(item => item.remove());
+
+        // Render each experience
+        experiences.forEach((exp, index) => {
+            const item = this.createTimelineItem(exp, index);
+            timeline.appendChild(item);
+        });
+
+        this.experiencesLoaded = true;
+    },
+
+    createTimelineItem(exp, index) {
+        const item = document.createElement('div');
+        item.className = 'timeline-item';
+        item.style.animationDelay = `${0.1 + index * 0.15}s`;
+
+        // Format date range - show only start_date if no end_date or if they're the same
+        let dateRange;
+        if (!exp.end_date || exp.end_date === exp.start_date) {
+            dateRange = this.escapeHtml(exp.start_date);
+        } else {
+            dateRange = `${this.escapeHtml(exp.start_date)} - ${this.escapeHtml(exp.end_date)}`;
+        }
+
+        // Build highlights HTML if available
+        let highlightsHtml = '';
+        if (exp.highlights && exp.highlights.length > 0) {
+            const highlightItems = exp.highlights
+                .map(h => `<li>${this.escapeHtml(h)}</li>`)
+                .join('');
+            highlightsHtml = `<ul class="timeline-highlights">${highlightItems}</ul>`;
+        }
+
+        // Build description HTML if available
+        const descriptionHtml = exp.description
+            ? `<p class="timeline-description">${this.escapeHtml(exp.description)}</p>`
+            : '';
+
+        item.innerHTML = `
+            <div class="timeline-card">
+                <span class="timeline-date">${dateRange}</span>
+                <h3 class="timeline-title">${this.escapeHtml(exp.title)}</h3>
+                <p class="timeline-position">${this.escapeHtml(exp.position)}</p>
+                ${descriptionHtml}
+                ${highlightsHtml}
+            </div>
+        `;
+
+        return item;
+    },
+
+    showError() {
+        const experienceLoading = document.getElementById('experienceLoading');
+        const experienceError = document.getElementById('experienceError');
+
+        if (experienceLoading) experienceLoading.style.display = 'none';
+        if (experienceError) experienceError.style.display = 'flex';
+    },
+
+    escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+};
+
+// ============================================
 // Footer Year
 // ============================================
 
@@ -833,6 +959,7 @@ function onDOMReady() {
     FooterManager.init();
     CertificationsManager.init();
     ProjectsManager.init();
+    ExperiencesManager.init();
     initEventListeners();
 
     // Add loaded class to body for any initial animations

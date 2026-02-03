@@ -43,6 +43,13 @@ certifications:
     badge: assets/badges/thm-sal1.png
     verify_url: https://www.credly.com/badges/24bd181a-70fd-4c12-b2f2-399be7bd6209/public_url
 
+  - name: Dante - HTB Pro Labs
+    issuer: Hack The Box
+    year: 2024
+    status: ACTIVE
+    badge: assets/badges/htb-dante.svg
+    verify_url: https://labs.hackthebox.com/achievement/badge/147100/73
+
   - name: Certified Incident Responder (eCIR)
     issuer: INE Security
     year: 2024

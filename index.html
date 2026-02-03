@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+Lao+Looped:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=6">
 
     <!-- YAML Parser (for dynamic projects loading) -->
     <script src="js/js-yaml.min.js"></script>
@@ -34,6 +34,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" class="nav-link active" data-link>Home</a></li>
                 <li><a href="#about" class="nav-link" data-link>About</a></li>
+                <li><a href="#experiences" class="nav-link" data-link>Experiences</a></li>
                 <li><a href="#certifications" class="nav-link" data-link>Certifications</a></li>
                 <li><a href="#projects" class="nav-link" data-link>Projects</a></li>
                 <li><a href="#blog" class="nav-link" data-link>Blog</a></li>
@@ -265,6 +266,36 @@
             </div>
         </section>
 
+        <!-- Experiences Page -->
+        <section id="experiences" class="page">
+            <div class="experiences-container">
+                <div class="page-header">
+                    <span class="section-label">Career Journey</span>
+                    <h2 class="section-title">Experiences</h2>
+                    <p class="section-description">My professional journey and milestones.</p>
+                </div>
+
+                <div class="timeline" id="experienceTimeline">
+                    <!-- Loading State -->
+                    <div class="timeline-loading" id="experienceLoading">
+                        <div class="spinner"></div>
+                        <p>Loading experiences...</p>
+                    </div>
+                </div>
+
+                <!-- Error State (hidden by default) -->
+                <div class="timeline-error" id="experienceError" style="display: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                    <h3>Unable to load experiences</h3>
+                    <p>Please check that <code>experiences.yml</code> exists and is properly formatted.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Certifications Page -->
         <section id="certifications" class="page">
             <div class="certifications-container">
@@ -400,6 +431,6 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="js/app.js"></script>
+    <script src="js/app.js?v=3"></script>
 </body>
 </html>

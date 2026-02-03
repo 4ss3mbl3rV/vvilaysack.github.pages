@@ -1,0 +1,73 @@
+# ===========================================
+# Experiences Configuration
+# ===========================================
+# Add your experiences below. Each experience should have:
+#   - title: Company or organization name
+#   - position: Your role/position
+#   - start_date: Start date (e.g., "Jan 2023" or "2023")
+#   - end_date: End date (e.g., "Dec 2024" or "Present")
+#   - description: Brief description of responsibilities (optional)
+#   - highlights: List of key achievements (optional)
+#
+# Experiences are displayed in order from top to bottom.
+# Put the most recent experience first.
+# ===========================================
+
+experiences:
+  - title: Data Cyber Shield Co., Ltd.
+    position: Chief Executive Officer
+    start_date: Oct 2025
+    end_date: Present
+    description: Leading a cybersecurity firm specializing in advanced threat detection and response, digital forensics investigation and security consulting.
+    # highlights:
+    #   - Implemented SIEM use cases reducing false positives by 40%
+    #   - Led incident response for critical security events
+    #   - Developed automation scripts for security operations
+
+  - title: Cyberus Sole Co., Ltd.
+    position: Incident Response Consultant
+    start_date: Jun 2022
+    end_date: Sep 2025
+    description: DFIR consultant focusing on incident response and threat mitigation.
+    # highlights:
+    #   - Analyzed and triaged 500+ security alerts monthly
+    #   - Created documentation for common incident types
+    #   - Assisted in vulnerability assessments
+
+  - title: APNIC56 Conference
+    position: Network Security Fellow
+    start_date: Sep 2023
+    end_date: Sep 2023
+    description: Selected as a Network Security Fellow to participate in APNIC56, focusing on enhancing network security practices, collaboration, and governance.
+
+  - title: JENESYS 2019 Inbound Program Monozukuri
+    position: Exchange Scholar
+    start_date: Mar 2023
+    end_date: Mar 2023
+    description: Selected as a scholar to participate in the JENESYS 2019 Inbound Program Monozukuri, focusing on cultural exchange and learning about Japanese manufacturing and technology.
+
+  - title: Logos Institute of Foreign Language
+    position: Associate Degree in English Language
+    start_date: Sep 2021
+    end_date: Jun 2023
+    description: Completed an Associate Degree in English Language, enhancing communication skills and proficiency in English for professional and academic purposes.
+
+  - title: CQ Co., Ltd.
+    position: Computer Security Engineer Intern
+    start_date: Jun 2020
+    end_date: Aug 2020
+    description: Computer Security Engineer Intern focusing on penetration testing and vulnerability assessments.
+    # highlights:
+    #   - Graduated with honors
+    #   - Completed cybersecurity capstone project
+    #   - Member of university CTF team
+
+  - title: National University of Laos
+    position: Bachelor of Engineer in Computer Engineering
+    start_date: Sep 2018
+    end_date: Jun 2022
+    description: Completed a Bachelor's degree in Computer Engineering with a focus on cybersecurity and information technology.
+    highlights:
+      - Lead of software activity club generation 2.
+      - Completed cybersecurity phishing simulation thesis project.
+      - Representative of Laos in ASEAN CTF competition.
