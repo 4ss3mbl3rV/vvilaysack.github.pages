@@ -40,7 +40,7 @@
     --transition-slow: 0.5s ease;
 
     /* Font Families */
-    --font-display: 'Orbitron', sans-serif;
+    --font-display: 'Electrolize', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     --font-body: 'Space Grotesk', sans-serif;
     --font-lao: 'Noto Sans Lao Looped', sans-serif;
@@ -575,7 +575,7 @@ button {
 /* Hero Text */
 .hero-name {
     font-family: var(--font-display);
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 800;
     color: var(--text-primary);
     margin-bottom: 0.5rem;
@@ -764,7 +764,7 @@ button {
 
 .section-title {
     font-family: var(--font-display);
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 1.5rem;
@@ -1835,7 +1835,7 @@ button {
     }
 
     .hero-name {
-        font-size: 2.25rem;
+        font-size: 2.5rem;
     }
 
     .hero-subtitle {
@@ -1843,7 +1843,7 @@ button {
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 2.25rem;
     }
 
     .page {
@@ -1869,7 +1869,7 @@ button {
     }
 
     .hero-name {
-        font-size: 1.75rem;
+        font-size: 2rem;
     }
 
     .skill-card,
