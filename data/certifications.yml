@@ -22,13 +22,6 @@ certifications:
     badge: assets/badges/spg-soc-tier1.png
     verify_url: https://www.credly.com/badges/db96a035-42e3-4b48-96a6-585df0a8b6aa/public_url
 
-  - name: Basic SOC
-    issuer: SEC Playground
-    year: 2025
-    status: ACTIVE
-    badge: assets/badges/spg-basic-soc.png
-    verify_url: https://www.credly.com/badges/15352494-7b33-4c41-a103-222caa67245e/public_url
-
   - name: Certified Cybersecurity Technician (CCT)
     issuer: EC-Council
     year: 2025
