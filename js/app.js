@@ -163,7 +163,7 @@ const ThemeManager = {
 // ============================================
 
 const Router = {
-    pages: ['home', 'about', 'experiences', 'certifications', 'works', 'blog'],
+    pages: ['home', 'about', 'experiences', 'certifications', 'contributions', 'blog'],
 
     init() {
         // Handle initial load
@@ -610,21 +610,21 @@ const ProjectsManager = {
     },
 
     async fetchProjects() {
-        const projectsGrid = document.getElementById('projectsGrid');
-        const projectsLoading = document.getElementById('projectsLoading');
-        const projectsError = document.getElementById('projectsError');
+        const contributionsGrid = document.getElementById('contributionsGrid');
+        const contributionsLoading = document.getElementById('contributionsLoading');
+        const contributionsError = document.getElementById('contributionsError');
 
-        if (!projectsGrid || this.projectsLoaded) return;
+        if (!contributionsGrid || this.projectsLoaded) return;
 
         // Show loading state
-        if (projectsLoading) projectsLoading.style.display = 'flex';
-        if (projectsError) projectsError.style.display = 'none';
+        if (contributionsLoading) contributionsLoading.style.display = 'flex';
+        if (contributionsError) contributionsError.style.display = 'none';
 
         try {
             // Fetch the YAML file with timeout
-            const response = await fetchWithTimeout('data/works.yml');
+            const response = await fetchWithTimeout('data/contributions.yml');
             if (!response.ok) {
-                throw new Error('Failed to load data/works.yml');
+                throw new Error('Failed to load data/contributions.yml');
             }
 
             const yamlText = await response.text();
@@ -632,11 +632,11 @@ const ProjectsManager = {
             // Parse YAML using js-yaml library
             const data = jsyaml.load(yamlText);
 
-            if (!data || !data.works || data.works.length === 0) {
-                throw new Error('No works found in YAML');
+            if (!data || !data.contributions || data.contributions.length === 0) {
+                throw new Error('No contributions found in YAML');
             }
 
-            this.renderProjects(data.works);
+            this.renderProjects(data.contributions);
 
         } catch (error) {
             console.error('Error loading projects:', error);
@@ -645,24 +645,24 @@ const ProjectsManager = {
     },
 
     renderProjects(projects) {
-        const projectsGrid = document.getElementById('projectsGrid');
-        const projectsLoading = document.getElementById('projectsLoading');
-        const projectsError = document.getElementById('projectsError');
+        const contributionsGrid = document.getElementById('contributionsGrid');
+        const contributionsLoading = document.getElementById('contributionsLoading');
+        const contributionsError = document.getElementById('contributionsError');
 
-        if (!projectsGrid) return;
+        if (!contributionsGrid) return;
 
         // Hide loading
-        if (projectsLoading) projectsLoading.style.display = 'none';
-        if (projectsError) projectsError.style.display = 'none';
+        if (contributionsLoading) contributionsLoading.style.display = 'none';
+        if (contributionsError) contributionsError.style.display = 'none';
 
         // Clear existing cards
-        const existingCards = projectsGrid.querySelectorAll('.project-card');
+        const existingCards = contributionsGrid.querySelectorAll('.contribution-card');
         existingCards.forEach(card => card.remove());
 
-        // Render each project
+        // Render each contribution
         projects.forEach((project, index) => {
             const card = this.createProjectCard(project, index);
-            projectsGrid.appendChild(card);
+            contributionsGrid.appendChild(card);
         });
 
         // Update project count on About page
@@ -676,7 +676,7 @@ const ProjectsManager = {
 
     createProjectCard(project, index) {
         const card = document.createElement('article');
-        card.className = 'project-card';
+        card.className = 'contribution-card';
         card.style.animationDelay = `${0.1 + index * 0.1}s`;
 
         // Build tags HTML
@@ -689,7 +689,7 @@ const ProjectsManager = {
         if (project.links) {
             if (project.links.github) {
                 linksHtml += `
-                    <a href="${this.escapeHtml(project.links.github)}" class="project-link" target="_blank" rel="noopener noreferrer">
+                    <a href="${this.escapeHtml(project.links.github)}" class="contribution-link" target="_blank" rel="noopener noreferrer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                         </svg>
@@ -699,7 +699,7 @@ const ProjectsManager = {
             }
             if (project.links.demo) {
                 linksHtml += `
-                    <a href="${this.escapeHtml(project.links.demo)}" class="project-link" target="_blank" rel="noopener noreferrer">
+                    <a href="${this.escapeHtml(project.links.demo)}" class="contribution-link" target="_blank" rel="noopener noreferrer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="2" y1="12" x2="22" y2="12"></line>
@@ -715,25 +715,25 @@ const ProjectsManager = {
         const statusClass = project.status?.toLowerCase() === 'completed' ? 'completed' : 'active';
 
         card.innerHTML = `
-            <div class="project-card-header">
-                <span class="project-category">${this.escapeHtml(project.category || 'Project')}</span>
-                <span class="project-status ${statusClass}">${this.escapeHtml(project.status || 'Active')}</span>
+            <div class="contribution-card-header">
+                <span class="contribution-category">${this.escapeHtml(project.category || 'Project')}</span>
+                <span class="contribution-status ${statusClass}">${this.escapeHtml(project.status || 'Active')}</span>
             </div>
-            <h3 class="project-name">${this.escapeHtml(project.name)}</h3>
-            <p class="project-description">${this.escapeHtml(project.description || '')}</p>
-            <div class="project-tags">${tagsHtml}</div>
-            <div class="project-links">${linksHtml}</div>
+            <h3 class="contribution-name">${this.escapeHtml(project.name)}</h3>
+            <p class="contribution-description">${this.escapeHtml(project.description || '')}</p>
+            <div class="contribution-tags">${tagsHtml}</div>
+            <div class="contribution-links">${linksHtml}</div>
         `;
 
         return card;
     },
 
     showError() {
-        const projectsLoading = document.getElementById('projectsLoading');
-        const projectsError = document.getElementById('projectsError');
+        const contributionsLoading = document.getElementById('contributionsLoading');
+        const contributionsError = document.getElementById('contributionsError');
 
-        if (projectsLoading) projectsLoading.style.display = 'none';
-        if (projectsError) projectsError.style.display = 'flex';
+        if (contributionsLoading) contributionsLoading.style.display = 'none';
+        if (contributionsError) contributionsError.style.display = 'flex';
     },
 
     escapeHtml(text) {

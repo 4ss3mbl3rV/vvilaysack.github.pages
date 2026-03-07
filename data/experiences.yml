@@ -34,18 +34,6 @@ experiences:
     #   - Created documentation for common incident types
     #   - Assisted in vulnerability assessments
 
-  - title: APNIC56 Conference
-    position: Network Security Fellow
-    start_date: Sep 2023
-    end_date: Sep 2023
-    description: Selected as a Network Security Fellow to participate in APNIC56, focusing on enhancing network security practices, collaboration, and governance.
-
-  - title: JENESYS 2019 Inbound Program Monozukuri
-    position: Exchange Scholar
-    start_date: Mar 2023
-    end_date: Mar 2023
-    description: Selected as a scholar to participate in the JENESYS 2019 Inbound Program Monozukuri, focusing on cultural exchange and learning about Japanese manufacturing and technology.
-
   - title: Logos Institute of Foreign Language
     position: Associate Degree in English Language
     start_date: Sep 2021
@@ -66,7 +54,7 @@ experiences:
     position: Bachelor of Engineer in Computer Engineering
     start_date: Sep 2018
     end_date: Jun 2022
-    description: Completed a Bachelor's degree in Computer Engineering with a focus on cybersecurity and information technology.
+    description: Completed a Bachelor's degree in Computer Engineering with a focus on information security.
     highlights:
       - Lead of software activity club generation 2.
       - Completed cybersecurity phishing simulation thesis project.

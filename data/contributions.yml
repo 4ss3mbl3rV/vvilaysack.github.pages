@@ -1,7 +1,7 @@
 # ===========================================
-# Works Configuration
+# Contributions Configuration
 # ===========================================
-# Add your works below. Each work should have:
+# Add your contributions below. Each entry should have:
 #   - name: Project title
 #   - category: Open Source | Personal | Lab | Tool
 #   - status: Active | Completed
@@ -22,7 +22,7 @@
 #       demo: https://project-demo.com
 # ===========================================
 
-works:
+contributions:
   - name: Pyphish - Phishing Simulation Platform
     category: Thesis Project
     status: Completed
@@ -36,6 +36,61 @@ works:
       - MailChimp
     links:
       github: #
+
+  - name: ACS Hacking Contest 2026
+    category: CTF Competition
+    status: Completed
+    description: Represented Laos at the ASEAN Cyber Shield Hacking Contest 2026 in Busan, South Korea — a KISA-initiated regional competition promoting cybersecurity skill development among ASEAN nations.
+    tags:
+      - Teamwork
+      - Digital forensics
+      - Reverse engineering
+      - Web exploitation
+      - Binary exploitation
+      - Cryptography
+
+  - name: ACS Hacking Contest 2025
+    category: CTF Competition
+    status: Completed
+    description: Represented Laos at the ASEAN Cyber Shield Hacking Contest 2025 in Ha Long, Vietnam — a KISA-initiated regional competition promoting cybersecurity skill development among ASEAN nations.
+    tags:
+      - Teamwork
+      - Digital forensics
+      - Reverse engineering
+      - Web exploitation
+      - Binary exploitation
+      - Cryptography
+
+  - name: ACS Hacking Contest 2024
+    category: CTF Competition
+    status: Completed
+    description: Represented Laos at the ASEAN Cyber Shield Hacking Contest 2024 in Jakarta, Indonesia — a KISA-initiated regional competition promoting cybersecurity skill development among ASEAN nations.
+    tags:
+      - Teamwork
+      - Digital forensics
+      - Reverse engineering
+      - Web exploitation
+      - Binary exploitation
+      - Cryptography
+
+  - name: APNIC56 Conference
+    category: Fellowship
+    status: Completed
+    description: Selected as a Network Security Fellow to participate in APNIC56, focusing on enhancing network security practices, collaboration, and governance.
+    tags:
+      - Network security
+      - Internet governance
+      - Internet society
+      - Community engagement
+
+  - name: JENESYS 2019 Inbound Program Monozukuri
+    category: Fellowship
+    status: Completed
+    description: Selected as a scholar to participate in the JENESYS 2019 Inbound Program Monozukuri, focusing on cultural exchange and learning about Japanese manufacturing and technology.
+    tags:
+      - Cultural exchange
+      - Technology education
+      - International collaboration
 
   - name: AWS Cloud Day Laos 2026
     category: Conference

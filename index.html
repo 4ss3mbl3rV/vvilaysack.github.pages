@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Electrolize&family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+Lao+Looped:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/styles.css?v=12">
+    <link rel="stylesheet" href="css/styles.css?v=18">
 
     <!-- YAML Parser (for dynamic projects loading) -->
     <script src="js/js-yaml.min.js"></script>
@@ -36,7 +36,7 @@
                 <li><a href="#about" class="nav-link" data-link>About</a></li>
                 <li><a href="#experiences" class="nav-link" data-link>Experiences</a></li>
                 <li><a href="#certifications" class="nav-link" data-link>Certifications</a></li>
-                <li><a href="#works" class="nav-link" data-link>Works</a></li>
+                <li><a href="#contributions" class="nav-link" data-link>Contributions</a></li>
                 <li><a href="#blog" class="nav-link" data-link>Blog</a></li>
 
                 <!-- Mobile Theme Toggle (inside menu) -->
@@ -232,7 +232,7 @@
                             </div>
                             <div class="stat-item">
                                 <span class="stat-number" id="statProjects">0</span>
-                                <span class="stat-label">Works</span>
+                                <span class="stat-label">Contributions</span>
                             </div>
                         </div>
                     </div>
@@ -326,32 +326,32 @@
             </div>
         </section>
 
-        <!-- Works Page -->
-        <section id="works" class="page">
-            <div class="projects-container">
+        <!-- Contributions Page -->
+        <section id="contributions" class="page">
+            <div class="contributions-container">
                 <div class="page-header">
-                    <span class="section-label">My Work</span>
-                    <h2 class="section-title">Works</h2>
+                    <span class="section-label">Industry Influence</span>
+                    <h2 class="section-title">Contributions</h2>
                     <p class="section-description">A showcase of security tools, research projects, speaking engagements, lab environments, and collaborative projects I've developed and contributed to.</p>
                 </div>
 
-                <div class="projects-grid" id="projectsGrid">
+                <div class="contributions-grid" id="contributionsGrid">
                     <!-- Loading State -->
-                    <div class="projects-loading" id="projectsLoading">
+                    <div class="contributions-loading" id="contributionsLoading">
                         <div class="spinner"></div>
-                        <p>Loading works...</p>
+                        <p>Loading contributions...</p>
                     </div>
                 </div>
 
                 <!-- Error State (hidden by default) -->
-                <div class="projects-error" id="projectsError" style="display: none;">
+                <div class="contributions-error" id="contributionsError" style="display: none;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"></circle>
                         <line x1="12" y1="8" x2="12" y2="12"></line>
                         <line x1="12" y1="16" x2="12.01" y2="16"></line>
                     </svg>
-                    <h3>Unable to load works</h3>
-                    <p>Please check that <code>works.yml</code> exists and is properly formatted.</p>
+                    <h3>Unable to load contributions</h3>
+                    <p>Please check that <code>contributions.yml</code> exists and is properly formatted.</p>
                 </div>
             </div>
         </section>
@@ -431,6 +431,6 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="js/app.js?v=7"></script>
+    <script src="js/app.js?v=10"></script>
 </body>
 </html>
