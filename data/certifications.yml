@@ -50,6 +50,13 @@ certifications:
     badge: assets/badges/fortinet-fundamentals.png
     verify_url: https://www.credly.com/badges/c143a508-e207-4ddd-9f01-1383a60c031f/public_url
 
+  - name: Certified API Security Analyst
+    issuer: APIsec
+    year: 2025
+    status: ACTIVE
+    badge: assets/badges/apisec-casa.png
+    verify_url: https://www.credly.com/badges/9cba8831-5c43-4135-9250-534da4e3fa5e/public_url
+
   - name: Foundation of Operationalizing MITRE ATT&CK v13
     issuer: AttackIQ
     year: 2024
