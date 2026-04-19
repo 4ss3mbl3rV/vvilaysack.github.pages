@@ -71,9 +71,9 @@ certifications:
     badge: assets/badges/thm-sal1.png
     verify_url: https://www.credly.com/badges/24bd181a-70fd-4c12-b2f2-399be7bd6209/public_url
 
-  - name: SOC Tier 1
+  - name: Certified Security Operations Specialist (CSOS)
     issuer: SEC Playground
     year: 2026
     status: ACTIVE
-    badge: assets/badges/spg-soc-tier1.png
+    badge: assets/badges/spg-csos.png
     verify_url: https://www.credly.com/badges/db96a035-42e3-4b48-96a6-585df0a8b6aa/public_url
