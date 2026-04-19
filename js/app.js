@@ -534,12 +534,76 @@ const CertificationsManager = {
             statCertifications.textContent = certifications.length;
         }
 
+        this.initFilters(certifications);
         this.certsLoaded = true;
+    },
+
+    initFilters(certifications) {
+        const filtersContainer = document.getElementById('certFilters');
+        if (!filtersContainer) return;
+
+        // Derive unique categories from data, preserving insertion order
+        const categories = [...new Set(certifications.map(c => c.category || 'General'))];
+
+        // Build buttons: All + one per unique category
+        filtersContainer.innerHTML = '';
+        const allBtn = this.createFilterBtn('All', 'all', true);
+        filtersContainer.appendChild(allBtn);
+        categories.forEach(cat => {
+            filtersContainer.appendChild(this.createFilterBtn(cat, cat, false));
+        });
+
+        // Attach click behaviour
+        const filterBtns = filtersContainer.querySelectorAll('.cert-filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                const allCards = document.querySelectorAll('.cert-card');
+
+                // Step 1: fade out all visible cards
+                allCards.forEach(card => {
+                    if (!card.classList.contains('hidden')) {
+                        card.classList.add('cert-exiting');
+                    }
+                });
+
+                // Step 2: after exit animation, apply filter and re-animate matching cards
+                setTimeout(() => {
+                    let visibleIndex = 0;
+                    allCards.forEach(card => {
+                        card.classList.remove('cert-exiting');
+                        const matches = filter === 'all' || card.getAttribute('data-category') === filter;
+                        if (matches) {
+                            card.classList.remove('hidden');
+                            // Reset and re-trigger cardReveal with stagger
+                            card.style.animation = 'none';
+                            card.offsetHeight; // force reflow
+                            card.style.animation = '';
+                            card.style.animationDelay = `${visibleIndex * 0.08}s`;
+                            visibleIndex++;
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                }, 150);
+            });
+        });
+    },
+
+    createFilterBtn(label, filter, isActive) {
+        const btn = document.createElement('button');
+        btn.className = 'cert-filter-btn' + (isActive ? ' active' : '');
+        btn.setAttribute('data-filter', filter);
+        btn.textContent = label;
+        return btn;
     },
 
     createCertCard(cert, index) {
         const card = document.createElement('article');
         card.className = 'cert-card';
+        card.setAttribute('data-category', cert.category || 'General');
         card.style.animationDelay = `${0.1 + index * 0.1}s`;
 
         // Determine status class

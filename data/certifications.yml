@@ -19,6 +19,7 @@ certifications:
     issuer: Security Blue Team
     year: 2023
     status: ACTIVE
+    category: Defensive Security
     badge: assets/badges/sbt-btl1.png
     verify_url: https://www.credly.com/badges/e3dad2b1-9a35-4324-bf14-08a3fa686dc5/public_url
 
@@ -26,6 +27,7 @@ certifications:
     issuer: INE Security
     year: 2024
     status: ACTIVE
+    category: Defensive Security
     badge: assets/badges/ine-ecir.png
     verify_url: https://certs.ine.com/d2ef19a3-94e3-40ea-a6ff-6737ab7e4179
 
@@ -33,27 +35,39 @@ certifications:
     issuer: Hack The Box
     year: 2024
     status: ACTIVE
+    category: Offensive Security
     badge: assets/badges/htb-dante.svg
     verify_url: https://labs.hackthebox.com/achievement/badge/147100/73
 
   - name: Certified Cybersecurity Technician (CCT)
     issuer: EC-Council
-    year: 2025
+    year: 2026
     status: ACTIVE
+    category: General
     badge: assets/badges/ecc-cct.png
     verify_url: https://aspen.eccouncil.org/Certificate/DownloadDigitalCert?Serial=RZmj0QVTO4Q+2pwGvmJgVuTbuyU0ZV3wDWARP2OWZUE=
 
   - name: Fortinet Certified Fundamentals - Cybersecurity
     issuer: Fortinet
-    year: 2025
+    year: 2026
     status: ACTIVE
+    category: General
     badge: assets/badges/fortinet-fundamentals.png
     verify_url: https://www.credly.com/badges/c143a508-e207-4ddd-9f01-1383a60c031f/public_url
 
+  - name: Fortinet Certified Associate - Cybersecurity
+    issuer: Fortinet
+    year: 2026
+    category: General
+    status: ACTIVE
+    badge: assets/badges/fortinet-associate.png
+    verify_url: https://www.credly.com/badges/161295f7-631e-4780-8172-4b783d78203c/public_url
+
   - name: Certified API Security Analyst
     issuer: APIsec
-    year: 2025
+    year: 2026
     status: ACTIVE
+    category: General
     badge: assets/badges/apisec-casa.png
     verify_url: https://www.credly.com/badges/9cba8831-5c43-4135-9250-534da4e3fa5e/public_url
 
@@ -61,6 +75,7 @@ certifications:
     issuer: AttackIQ
     year: 2024
     status: ACTIVE
+    category: Defensive Security
     badge: assets/badges/attackiq-mitre-att&ck-v13.png
     verify_url: https://www.credly.com/badges/ddb7b1a1-863a-4078-be26-72bb285ee65e/public_url
 
@@ -68,6 +83,7 @@ certifications:
     issuer: TryHackMe
     year: 2025
     status: ACTIVE
+    category: Defensive Security
     badge: assets/badges/thm-sal1.png
     verify_url: https://www.credly.com/badges/24bd181a-70fd-4c12-b2f2-399be7bd6209/public_url
 
@@ -75,5 +91,6 @@ certifications:
     issuer: SEC Playground
     year: 2026
     status: ACTIVE
+    category: Defensive Security
     badge: assets/badges/spg-csos.png
     verify_url: https://www.credly.com/badges/db96a035-42e3-4b48-96a6-585df0a8b6aa/public_url

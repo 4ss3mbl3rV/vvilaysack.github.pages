@@ -830,6 +830,50 @@ button {
     margin: 0 auto;
 }
 
+.cert-filters {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.cert-filter-btn {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.45rem 1rem;
+    background: var(--tag-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    letter-spacing: 0.03em;
+}
+
+.cert-filter-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.cert-filter-btn.active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: var(--bg-primary);
+}
+
+.cert-card.hidden {
+    display: none;
+}
+
+.cert-card.cert-exiting {
+    animation: certExit 0.15s ease forwards !important;
+}
+
+@keyframes certExit {
+    to { opacity: 0; transform: translateY(-8px); }
+}
+
 .cert-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
