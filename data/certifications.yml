@@ -5,8 +5,11 @@
 #   - name: Certification name
 #   - issuer: Issuing organization
 #   - year: Year obtained
-#   - status: ACTIVE or EXPIRED
-#   - description: Brief description
+#   - status: ACTIVE or EXPIRED (auto-overridden if expiry is set and has passed)
+#   - category: Defensive Security | Offensive Security | General
+#   - expiry: Expiration month in YYYY-MM format (e.g. 2027-03). Optional.
+#             If set, the website automatically marks the cert as EXPIRED
+#             once that month has passed — no manual update needed.
 #   - badge: Path to badge image (e.g., assets/badges/security-plus.png)
 #   - verify_url: URL to verify the certification (Credly, etc.)
 #
@@ -42,14 +45,25 @@ certifications:
   - name: Certified Cybersecurity Technician (CCT)
     issuer: EC-Council
     year: 2026
+    expiry: 2029-01
     status: ACTIVE
     category: General
     badge: assets/badges/ecc-cct.png
     verify_url: https://aspen.eccouncil.org/Certificate/DownloadDigitalCert?Serial=RZmj0QVTO4Q+2pwGvmJgVuTbuyU0ZV3wDWARP2OWZUE=
 
+  - name: Proofpoint Certified AI Email Security Specialist
+    issuer: Proofpoint
+    year: 2026
+    expiry: 2028-05
+    status: ACTIVE
+    category: General
+    badge: assets/badges/proofpoint-ai-email-security-2026.png
+    verify_url: https://www.credly.com/badges/694787f2-f326-4ecc-b190-a60c8e3cd04c/public_url
+
   - name: Fortinet Certified Associate - Cybersecurity
     issuer: Fortinet
     year: 2026
+    expiry: 2028-04
     category: General
     status: ACTIVE
     badge: assets/badges/fortinet-associate.png
@@ -58,6 +72,7 @@ certifications:
   - name: Fortinet Certified Fundamentals - Cybersecurity
     issuer: Fortinet
     year: 2026
+    expiry: 2028-04
     status: ACTIVE
     category: General
     badge: assets/badges/fortinet-fundamentals.png

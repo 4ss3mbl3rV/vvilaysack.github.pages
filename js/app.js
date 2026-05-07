@@ -600,15 +600,25 @@ const CertificationsManager = {
         return btn;
     },
 
+    isExpired(expiryStr) {
+        if (!expiryStr) return false;
+        const [year, month] = expiryStr.toString().split('-').map(Number);
+        if (!year || !month) return false;
+        const now = new Date();
+        // Expired once the expiry month itself has ended
+        return now.getFullYear() > year || (now.getFullYear() === year && now.getMonth() + 1 > month);
+    },
+
     createCertCard(cert, index) {
         const card = document.createElement('article');
         card.className = 'cert-card';
         card.setAttribute('data-category', cert.category || 'General');
         card.style.animationDelay = `${0.1 + index * 0.1}s`;
 
-        // Determine status class
-        const statusClass = cert.status?.toUpperCase() === 'ACTIVE' ? 'active' : 'expired';
-        const statusText = cert.status?.toUpperCase() || 'ACTIVE';
+        // Auto-detect expiry: override status if expiry date has passed
+        const expired = this.isExpired(cert.expiry) || cert.status?.toUpperCase() === 'EXPIRED';
+        const statusClass = expired ? 'expired' : 'active';
+        const statusText = expired ? 'EXPIRED' : 'ACTIVE';
 
         // Build verify button HTML
         let verifyHtml = '';
